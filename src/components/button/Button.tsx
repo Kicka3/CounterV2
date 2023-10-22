@@ -1,4 +1,6 @@
 import React, {ButtonHTMLAttributes} from 'react';
+import '../button/button.css'
+
 
 type ButtonPropsType = {
     name: string

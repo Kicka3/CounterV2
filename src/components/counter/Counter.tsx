@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Button} from "./Button";
+import {Button} from "../button/Button";
+import '../counter/counter.css'
 
 export const Counter = () => {
     const [number, setNnumber] = useState<number>(0);
