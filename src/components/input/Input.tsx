@@ -1,5 +1,6 @@
 import "../input/input.css"
 import {ChangeEvent, useEffect, useState} from "react";
+import React from 'react';
 
 type InputPropsType = {
     maximValue: (newMaxValue: number) => void

@@ -14,11 +14,10 @@ function App() {
     }
     //---------------------------
 
-    //Logics from counter:
-    //This is state of counter
-    const [number, setNumber] = useState<number>(0);
-    //This is value for disabled btns
-    const [maxValue, setMaxValue] = useState<boolean>(false);
+    //Logics from counter//:
+
+    const [number, setNumber] = useState<number>(0);                //This is global state of counter
+    const [maxValue, setMaxValue] = useState<boolean>(false);       //This is value for disabled btns
 
     const setNewNumber = (number: number) => {
         setNumber(number)
@@ -37,11 +36,11 @@ function App() {
                 maximumValue={setMaximumValue}
             />
             <Counter
-                number={number}
-                setNumber={setNewNumber}
-                setMaxValue={setMaxValue}
-                maxValue={maxValue}
-                maxiValue={maxiValue}
+                number={number}                     //Число в стейте которое каунтим
+                setNumber={setNewNumber}            //Сетаем в стейт который каунтим
+                maxValue={maxValue}                 //Максимальное число-ограничение
+                setMaxValue={setMaxValue}           //Сетаем максимальное число-ограничение
+                maxiValue={maxiValue}               //Функция-блокиратор (определяет макс число)
             />
         </div>
     );

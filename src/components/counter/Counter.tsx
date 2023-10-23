@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button} from "../button/Button";
 import '../counter/counter.css'
 
 type CounterPropsType = {
-    number: number
-    setNumber: (number: number) => void
-    maxiValue: () => void
-    maxValue: boolean
-    setMaxValue: (value: boolean) => void
+    number: number                                 //Число в стейте которое каунтим
+    setNumber: (number: number) => void            //Сетаем в стейт который каунтим
+    maxValue: boolean                              //Максимальное число-ограничение
+    setMaxValue: (value: boolean) => void          //Сетаем максимальное число-ограничение
+    maxiValue: () => void                          //Функция-блокиратор (определяет макс число)
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
@@ -46,15 +46,12 @@ export const Counter: React.FC<CounterPropsType> = (props) => {
                         name={"inc"}
                         onClick={incBtn}
                         disabled={maxValue}
-                        // maxValue={maxValue}
                     />
                     <Button
                         className={number === 0 ? 'DisabledBtn' : 'ActiveBtn'}
                         name={"reset"}
                         onClick={resetCount}
                         disabled={number === 0}
-                        // maxValue={maxValue}
-
                     />
                 </div>
             </div>
