@@ -2,26 +2,34 @@ import React, {useState} from 'react';
 import {Button} from "../button/Button";
 import '../counter/counter.css'
 
-export const Counter = () => {
-    const [number, setNnumber] = useState<number>(0);
-    const [maxValue, setMaxValue] = useState<boolean>(false);
+type CounterPropsType = {
+    number: number
+    setNumber: (number: number) => void
+    maxiValue: () => void
+    maxValue: boolean
+    setMaxValue: (value: boolean) => void
+}
+
+export const Counter: React.FC<CounterPropsType> = (props) => {
+    // const [number, setNumber] = useState<number>(0);
+    // const [maxValue, setMaxValue] = useState<boolean>(false);
+
+    // const maxiValue = () => {
+    //     if (number >= 4) {
+    //         setMaxValue(true);
+    //         console.log('WARNING!5');
+    //     }
+    // }
+    const {number, setNumber, maxiValue, maxValue, setMaxValue} = props
 
     const incBtn = () => {
-        setNnumber(number + 1);
-        maximunValue();
-        console.log('incr' + '' + number);
-    }
-
-    const maximunValue = () => {
-        if (number >= 4) {
-            setMaxValue(true);
-            console.log('WARNING!5');
-        }
+        setNumber(number + 1);
+        maxiValue();
     }
 
     const resetCount = () => {
         console.log('RESET')
-        setNnumber(0);
+        setNumber(0);
         setMaxValue(false);
     }
 
@@ -34,17 +42,18 @@ export const Counter = () => {
 
                 <div className={"BtnWrapper"}>
                     <Button
+                        className={maxValue ? 'DisabledBtn' : 'ActiveBtn'}
                         name={"inc"}
                         onClick={incBtn}
-                        maxValue={maxValue}
-                        className={maxValue ? 'DisabledBtn' : 'ActiveBtn'}
                         disabled={maxValue}
+                        // maxValue={maxValue}
                     />
-                    <Button name={"reset"}
-                            onClick={resetCount}
-                            maxValue={maxValue}
-                            className={number === 0 ? 'DisabledBtn' : 'ActiveBtn'}
-                            disabled={number === 0}
+                    <Button
+                        className={number === 0 ? 'DisabledBtn' : 'ActiveBtn'}
+                        name={"reset"}
+                        onClick={resetCount}
+                        disabled={number === 0}
+                        // maxValue={maxValue}
 
                     />
                 </div>

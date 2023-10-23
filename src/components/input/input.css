@@ -1,0 +1,7 @@
+.inputValue {
+    min-height: 28px;
+    max-width: 158px;
+    outline-color: rgb(21, 142, 185);
+    color: #000;
+    text-align: center;
+}
