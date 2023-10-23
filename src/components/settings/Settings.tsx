@@ -7,15 +7,15 @@ import {Input} from "../input/Input";
 type SettingsPropsType = {
     setCount: (value: number) => void                                     //Стартовое число из инпута
     newMaxValue: (maxValue: number) => void
+    setError: (errTitle: string) => void
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setCount, newMaxValue} = props
+    const {setCount, newMaxValue, setError} = props
 
     //Локальные стейты:
     const [maxValue, setMaxValue] = useState<number>(0);
     const [startValue, setStartValue] = useState<number>(0);
-    const [error, setError] = useState(null)
 
 
     const setValueHandler = () => {
@@ -39,6 +39,9 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
         console.log('Новое макс число из инпута:' + newMaxValue)
     }
 
+    const errorHandler = (errTitle: string) => {
+        setError(errTitle)
+    }
 
     return (
         <>
@@ -49,6 +52,7 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                         <Input
                             setValue={setMaxValueHandler}                  //Получаю новое макс число из инпута
                             value={maxValue}                               //Передаю инпуту max число
+                            errorMax={errorHandler}
                         />
                     </div>
                     <div className={"StartValueWrapper"}>

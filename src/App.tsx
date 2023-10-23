@@ -13,18 +13,16 @@ function App() {
 
     //Временный стейт для макс числа
     const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)
-
+    const [errorMax, setErrorMax] = useState<string | null>(null)
     const setNewNumber = (number: number) => {
         setCurrentCounterNumber(number)
     }
-
 
     const maxiValue = () => {                                           //Проверка на max число
         if (currentCounterNumber === (temporaryMaxNum - 1)) {
             setMaxValue(true);
         }
     }
-
 
     useEffect(() => {
         if (temporaryMaxNum) {
@@ -40,20 +38,27 @@ function App() {
 
     }
 
+    const setErrorHandler = (errTitle: string) => {
+        setErrorMax(errTitle)
+    }
+
     //-------------------------
 
     return (
         <div className="App">
             <Settings
+                setError={setErrorHandler}
                 newMaxValue={newMaxValueHandler}
                 setCount={setCountHandler}
             />
             <Counter
-                currentCountNumber={currentCounterNumber}                     //Число в стейте которое каунтим
+                currentCountNumber={currentCounterNumber}                   //Число в стейте которое каунтим
                 setNumber={setNewNumber}                                    //Сетаем в стейт который каунтим
                 maxValue={maxValue}                                         //Максимальное число-ограничение
                 setMaxValue={setMaxValue}                                   //Сетаем максимальное число-ограничение
                 maxiValue={maxiValue}                                       //Функция-блокиратор (определяет макс число)
+                setError={setErrorHandler}
+
             />
         </div>
     );

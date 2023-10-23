@@ -8,6 +8,7 @@ type CounterPropsType = {
     maxValue: boolean                              //Максимальное число-ограничение
     setMaxValue: (value: boolean) => void          //Сетаем максимальное число-ограничение
     maxiValue: () => void                          //Функция-блокиратор (определяет макс число)
+    setError: (errTitle: string) => void           //Ошибка на макс число
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
