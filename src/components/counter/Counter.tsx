@@ -3,7 +3,7 @@ import {Button} from "../button/Button";
 import '../counter/counter.css'
 
 type CounterPropsType = {
-    number: number                                 //Число в стейте которое каунтим
+    currentCountNumber: number                                 //Число в стейте которое каунтим
     setNumber: (number: number) => void            //Сетаем в стейт который каунтим
     maxValue: boolean                              //Максимальное число-ограничение
     setMaxValue: (value: boolean) => void          //Сетаем максимальное число-ограничение
@@ -11,11 +11,11 @@ type CounterPropsType = {
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
-    const {number, setNumber, maxiValue, maxValue, setMaxValue} = props
+    const {currentCountNumber, setNumber, maxiValue, maxValue, setMaxValue} = props
 
 
     const incBtn = () => {
-        setNumber(number + 1);
+        setNumber(currentCountNumber + 1);
         maxiValue();
     }
 
@@ -29,7 +29,7 @@ export const Counter: React.FC<CounterPropsType> = (props) => {
         <>
             <div className={"Counter"}>
                 <div className={"DisplayCount"}>
-                    <h1 className={maxValue ? "MaxNumber" : undefined}>{number}</h1>
+                    <h1 className={maxValue ? "MaxNumber" : undefined}>{currentCountNumber}</h1>
                 </div>
 
                 <div className={"BtnWrapper"}>
@@ -40,10 +40,10 @@ export const Counter: React.FC<CounterPropsType> = (props) => {
                         disabled={maxValue}
                     />
                     <Button
-                        className={number === 0 ? 'DisabledBtn' : 'ActiveBtn'}
+                        className={currentCountNumber === 0 ? 'DisabledBtn' : 'ActiveBtn'}
                         name={"reset"}
                         onClick={resetCount}
-                        disabled={number === 0}
+                        disabled={currentCountNumber === 0}
                     />
                 </div>
             </div>

@@ -12,11 +12,16 @@ export const Input: React.FC<InputPropsType> = (props) => {
     const {value, setValue, ...restProps} = props
 
     const [currentValue, setCurrentValue] = useState<number>(value)      //Локальный стейт инпута (сохраняет число в инпуте)
-
+    const [error, setError] = useState<boolean>(false)
     const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let valueForInput = e.currentTarget.valueAsNumber                 //Сохраняю число из инпута в number
-        setValue(valueForInput)                                           //Куда сетаю? Хуй знает
-        setCurrentValue(valueForInput)                                    //Сетаю полученное число в локальный стейт инпута
+        if (valueForInput <= 0) {                                         //Проверяю число
+            setError(true)           //Бага!! при 1
+        } else {
+            setValue(valueForInput)                                           //Куда сетаю? Хуй знает
+            setCurrentValue(valueForInput)                                    //Сетаю полученное число в локальный стейт инпута
+            setError(false)
+        }
     }
 
     useEffect(() => {                                               //При перезагрузке пррверяю пришло ли значение?
@@ -26,10 +31,11 @@ export const Input: React.FC<InputPropsType> = (props) => {
     }, [value]);                                                    //Следи за приходящим значением!
 
     return (
-        <input className={"inputValue"}                                   //Добавить стиль с ошибкой
-               type={"number"}
-               onChange={changeInputHandler}
-               value={currentValue}
+        <input
+            className={error ? "errorInput" : "inputValue"}               //Добавить стиль с ошибкой
+            type={"number"}
+            onChange={changeInputHandler}
+            value={currentValue}
         />
     );
 };

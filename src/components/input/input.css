@@ -1,7 +1,21 @@
 .inputValue {
     min-height: 28px;
     max-width: 158px;
-    outline-color: rgb(21, 142, 185);
+    border: 2px solid rgb(21, 142, 185);;
     color: #000;
     text-align: center;
+}
+
+.errorInput {
+    text-align: center;
+    min-height: 28px;
+    max-width: 158px;
+    color: #000000;
+    background-color: rgb(172, 94, 94);
+    border: 2px solid red;
+}
+
+.errorInput:focus {
+    background-color: rgb(172, 94, 94);
+    border: 2px solid red;
 }

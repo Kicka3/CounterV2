@@ -6,34 +6,36 @@ import {Input} from "../input/Input";
 
 type SettingsPropsType = {
     setCount: (value: number) => void                                     //Стартовое число из инпута
+    newMaxValue: (maxValue: number) => void
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setCount} = props
+    const {setCount, newMaxValue} = props
 
     //Локальные стейты:
     const [maxValue, setMaxValue] = useState<number>(0);
     const [startValue, setStartValue] = useState<number>(0);
+    const [error, setError] = useState(null)
 
 
     const setValueHandler = () => {
-        setCount(startValue)                                             //Передаём стартовое число из инпута выше
-
+        setCount(startValue)                                             //Передаём стартовое число для каунтера
+        newMaxValue(maxValue)                                            //Передаю новое Max число для каунтера
         console.log('Новое максимальное число:' + maxValue)
         let maxValueForStorage = JSON.stringify(maxValue)
-        localStorage.setItem('currentValue', maxValueForStorage)
+        localStorage.setItem('currentValue', maxValueForStorage)           //Сетаю новое макс число в storage
     }
 
     useEffect(() => {
-        let fromStorage = localStorage.getItem('currentValue')
-        if (fromStorage) {
-            let valueFromStorage = JSON.parse(fromStorage)                 //При загрузки страницы получаю число из localStorage
+        let numFromStorage = localStorage.getItem('currentValue')
+        if (numFromStorage) {
+            let valueFromStorage = JSON.parse(numFromStorage)              //При загрузки страницы получаю число из localStorage
             setMaxValue(valueFromStorage)                                  //И сетаю его в локальный стейт
         }
     }, []);
 
     const setMaxValueHandler = (newMaxValue: number) => {
-        setMaxValue(newMaxValue)                                          //Сохраняю число во временный стейт.
+        setMaxValue(newMaxValue)                                          //Сохраняю число в local стейт.
         console.log('Новое макс число из инпута:' + newMaxValue)
     }
 
