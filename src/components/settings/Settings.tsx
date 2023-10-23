@@ -1,35 +1,42 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from "../button/Button";
 import '../settings/settings.css'
 import {Input} from "../input/Input";
 
 
 type SettingsPropsType = {
-    maximumValue: (maxValue: number) => void
+    setCount: (value: number) => void
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-const {maximumValue} = props
+    const {setCount} = props
 
-    //Можно не типизировать (типизируем неявно)
-    const [maxValue, setMaxValue] = useState<number>();
-    const [startValue, setStartValue] = useState<number>();
+    //Локальные стейты:
+    const [maxValue, setMaxValue] = useState<number>(0);
+    const [startValue, setStartValue] = useState<number>(0);
 
 
     const setValueHandler = () => {
-        setMaxValue(startValue)
-        // maximumValue(maxValue)
-        console.log('Нвое максимальное число:' + maxValue)
+        setCount(startValue)                                      //Сохраняем новое значение из временного стейта в локальный.
+        console.log('Новое максимальное число:' + maxValue)
+        let maxValueForStorage = JSON.stringify(maxValue)
+        localStorage.setItem('currentValue', maxValueForStorage)
     }
 
-    const setMaximValue = (newMaxValue: number) => {
-        setStartValue(newMaxValue)
-        console.log('Принял новое число из инпута:' + newMaxValue)
+    useEffect(() => {                                              //При загрузки страницы получают число из стейта
+        let fromStorage = localStorage.getItem('currentValue')       //И сетаю его в локальный стейт
+        if (fromStorage) {
+            let valueFromStorage = JSON.parse(fromStorage)
+            setMaxValue(valueFromStorage)
+        }
+    }, []);
+
+    const setMaxValueHandler = (newMaxValue: number) => {
+        setMaxValue(newMaxValue)//Сохраняем число во временный стейт.
+        console.log('Новое макс число из инпута:' + newMaxValue)
     }
 
-    const zaglush = () => {
 
-    }
     return (
         <>
             <div className={"SettingsWrapper"}>
@@ -37,14 +44,15 @@ const {maximumValue} = props
                     <div className={"MaxValueWrapper"}>
                         <h1 className={"MaxValue"}>max value:</h1>
                         <Input
-                            maximValue={setMaximValue}
+                            setValue={setMaxValueHandler}                  //Получаю новое макс число из инпута
+                            value={maxValue}
                         />
                     </div>
                     <div className={"StartValueWrapper"}>
                         <h1 className={"MaxValue"}>start value:</h1>
-                        <Input
-                            maximValue={zaglush}
-                        />
+                        {/*<Input*/}
+                        {/*    maximValue={zaglush}*/}
+                        {/*/>*/}
                     </div>
                 </div>
 

@@ -28,12 +28,17 @@ function App() {
             console.log('WARNING!5');
         }
     }
+
+    const setCountHandler = () => {         //Стартовое число
+
+    }
+
     //-------------------------
 
     return (
         <div className="App">
             <Settings
-                maximumValue={setMaximumValue}
+                setCount={setCountHandler}
             />
             <Counter
                 number={number}                     //Число в стейте которое каунтим

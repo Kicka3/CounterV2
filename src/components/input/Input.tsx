@@ -3,33 +3,35 @@ import {ChangeEvent, useEffect, useState} from "react";
 import React from 'react';
 
 type InputPropsType = {
-    maximValue: (newMaxValue: number) => void
-
+    value: number
+    setValue: (newValue: number) => void
+    error?: string
+    // maximValue: (newMaxValue: number) => void
+    // maxValue: number                              //Ловлю макс число из settings
 }
 
 export const Input: React.FC<InputPropsType> = (props) => {
-    const {maximValue, ...restProps} = props
+    const {value, setValue, ...restProps} = props
 
-    const [currentValue, setCurrentValue] = useState<number>(0)
+    const [currentValue, setCurrentValue] = useState<number>(value)  //Локальный стейт инпута (сохраняет число в инпуте)
 
-    //Тут бага с отрисовкой корретного числа
     const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        let valueForInput = Number(e.currentTarget.value)
-        console.log(valueForInput)
+        let valueForInput = e.currentTarget.valueAsNumber
+        setValue(valueForInput)
         setCurrentValue(valueForInput)
-        // maximValue(currentValue)
     }
 
     useEffect(() => {
-        maximValue(currentValue)
-    }, [currentValue]);
-
+        if (value !== currentValue) {
+            setCurrentValue(value)
+        }
+    }, [value]);
 
     return (
-        <input className={"inputValue"}
+        <input className={"inputValue"}  //Добавить стиль с ошибкой
                type={"number"}
                onChange={changeInputHandler}
-            // value={currentValue}
+               value={currentValue}
         />
     );
 };
