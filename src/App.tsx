@@ -6,14 +6,6 @@ import {Settings} from "./components/settings/Settings";
 
 function App() {
 
-    //SetMaxValueInStorage
-    const [maxValueForCounter, setMaxValueForCounter] = useState<number>(0);
-
-    const setMaximumValue = (maxValue: number) => {
-        setMaxValueForCounter(maxValue)
-    }
-    //---------------------------
-
     //Logics from counter//:
 
     const [number, setNumber] = useState<number>(0);                //This is global state of counter

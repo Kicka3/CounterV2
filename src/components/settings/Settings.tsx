@@ -5,7 +5,7 @@ import {Input} from "../input/Input";
 
 
 type SettingsPropsType = {
-    setCount: (value: number) => void
+    setCount: (value: number) => void                                     //Стартовое число из инпута
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
@@ -17,22 +17,23 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
 
 
     const setValueHandler = () => {
-        setCount(startValue)                                      //Сохраняем новое значение из временного стейта в локальный.
+        setCount(startValue)                                             //Передаём стартовое число из инпута выше
+
         console.log('Новое максимальное число:' + maxValue)
         let maxValueForStorage = JSON.stringify(maxValue)
         localStorage.setItem('currentValue', maxValueForStorage)
     }
 
-    useEffect(() => {                                              //При загрузки страницы получают число из стейта
-        let fromStorage = localStorage.getItem('currentValue')       //И сетаю его в локальный стейт
+    useEffect(() => {
+        let fromStorage = localStorage.getItem('currentValue')
         if (fromStorage) {
-            let valueFromStorage = JSON.parse(fromStorage)
-            setMaxValue(valueFromStorage)
+            let valueFromStorage = JSON.parse(fromStorage)                 //При загрузки страницы получаю число из localStorage
+            setMaxValue(valueFromStorage)                                  //И сетаю его в локальный стейт
         }
     }, []);
 
     const setMaxValueHandler = (newMaxValue: number) => {
-        setMaxValue(newMaxValue)//Сохраняем число во временный стейт.
+        setMaxValue(newMaxValue)                                          //Сохраняю число во временный стейт.
         console.log('Новое макс число из инпута:' + newMaxValue)
     }
 
@@ -45,7 +46,7 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                         <h1 className={"MaxValue"}>max value:</h1>
                         <Input
                             setValue={setMaxValueHandler}                  //Получаю новое макс число из инпута
-                            value={maxValue}
+                            value={maxValue}                               //Передаю инпуту max число
                         />
                     </div>
                     <div className={"StartValueWrapper"}>

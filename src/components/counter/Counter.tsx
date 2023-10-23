@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from "../button/Button";
 import '../counter/counter.css'
 
@@ -11,16 +11,8 @@ type CounterPropsType = {
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
-    // const [number, setNumber] = useState<number>(0);
-    // const [maxValue, setMaxValue] = useState<boolean>(false);
-
-    // const maxiValue = () => {
-    //     if (number >= 4) {
-    //         setMaxValue(true);
-    //         console.log('WARNING!5');
-    //     }
-    // }
     const {number, setNumber, maxiValue, maxValue, setMaxValue} = props
+
 
     const incBtn = () => {
         setNumber(number + 1);
