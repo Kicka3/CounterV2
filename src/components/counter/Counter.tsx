@@ -3,7 +3,7 @@ import {Button} from "../button/Button";
 import '../counter/counter.css'
 
 type CounterPropsType = {
-    currentCountNumber: number                                 //Число в стейте которое каунтим
+    currentCountNumber: number                     //Число в стейте которое каунтим
     setNumber: (number: number) => void            //Сетаем в стейт который каунтим
     maxValue: boolean                              //Максимальное число-ограничение
     setMaxValue: (value: boolean) => void          //Сетаем максимальное число-ограничение
@@ -12,8 +12,11 @@ type CounterPropsType = {
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
-    const {currentCountNumber, setNumber, maxiValue, maxValue, setMaxValue} = props
+    const {currentCountNumber, setNumber, maxiValue, maxValue, setMaxValue, setError} = props
 
+    const setError = () => {
+
+    }
 
     const incBtn = () => {
         setNumber(currentCountNumber + 1);
