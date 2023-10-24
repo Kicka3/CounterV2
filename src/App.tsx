@@ -6,27 +6,27 @@ import {Settings} from "./components/settings/Settings";
 
 function App() {
 
-    //Logics from counter//:
+    //Logics for counter//:
 
     const [counterValue, setCounterValue] = useState<number>(0)          //This is global state of counter
     const [max, setMax] = useState<number>(5);                           //Максимальное число
     const [start, setStart] = useState<number>(0)                        //Стартовое число
 
 
-    //State of disable
-    const [disableBtn, setDisableBtn] = useState(false)
+    //State of disabled
+    const [disableBtn, setDisableBtn] = useState<boolean>(false)
 
 
-    // const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)           //Стейт максимального числа для дисплея
+    // const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)                  //Стейт максимального числа для дисплея
     const [errorMax, setErrorMax] = useState<string>('')                //Стейт ошибок для дисплея
 
-    const incBtnHandler = () => {                           //inc counter
+    const incBtnHandler = () => {                                                   //inc counter
         setCounterValue(num => num + 1);
-        // maxiValue();
+
     }
 
     const resetCountHandler = () => {
-        setCounterValue(start)                                          //Reset counter
+        setCounterValue(start)                                                      //Reset counter
         setDisableBtn(false)
         console.log('RESET')
     }
@@ -67,14 +67,10 @@ function App() {
                 setErrorDisplay={setErrorDisplayHandler}
             />
             <Counter
-                currentCountNumber={currentCounterNumber}                   //Число в стейте которое каунтим
-                setNumber={setNewNumber}                                    //Сетаем в стейт который каунтим
-                maxValue={maxValue}                                         //Максимальное число-ограничение
-                setMaxValue={setMaxValue}                                   //Сетаем максимальное число-ограничение
-                maxiValue={maxiValue}                                       //Функция-блокиратор (определяет макс число)
-                // setError={setErrorHandler}
-                errorMax={errorMax}
-
+                currentValue={counterValue}                                 //Число в стейте которое каунтим
+                maxValue={max}                                              //Максимальное число-ограничение
+                startValue={start}
+                disabled={disableBtn}
                 incBtn={incBtnHandler}
                 resetCount={resetCountHandler}
             />
