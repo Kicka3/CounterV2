@@ -3,27 +3,26 @@ import {ChangeEvent, useEffect, useState} from "react";
 import React from 'react';
 
 type InputPropsType = {
-    value: number
-    seMaxValue: (newValue: number) => void
-    setMaxError: (errTitle: string) => void  //Ошибка при -0
+    value: (value: number) => void
+    setMax: (newValue: number) => void              //Максимальное число
+
 }
 
 export const Input: React.FC<InputPropsType> = (props) => {
-    const {value, seMaxValue, setMaxError, ...restProps} = props
+    const {value, setMax} = props
 
     const [currentValue, setCurrentValue] = useState<number>(value)      //Локальный стейт инпута (сохраняет число в инпуте)
-    const [errorMax, setErrorMax] = useState<string>('')
+
 
     const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let valueForInput = e.currentTarget.valueAsNumber                 //Сохраняю число из инпута в number
+
         if (valueForInput < 1) {                                          //Проверяю число
-            setErrorMax('Incorrect max value')                      //Бага!! при 1
-            console.log('Ошибка в инпуте:' + errorMax)
-            setMaxError(errorMax)                                       //Отправляю ошибку выше
+            //Отправляю ошибку выше
         } else {
-            seMaxValue(valueForInput)                                     //Куда сетаю? Хуй знает
+            setMax(valueForInput)                                     //Куда сетаю? Хуй знает
             setCurrentValue(valueForInput)                                //Сетаю полученное число в локальный стейт инпута
-            setErrorMax('')
+
         }
     }
 
@@ -35,7 +34,8 @@ export const Input: React.FC<InputPropsType> = (props) => {
 
     return (
         <input
-            className={errorMax ? "errorInput" : "inputValue"}               //Добавить стиль с ошибкой
+            // className={errorMax ? "errorInput" : "inputValue"}               //Добавить стиль с ошибкой
+            className={"inputValue"}               //Добавить стиль с ошибкой
             type={"number"}
             onChange={changeInputHandler}
             value={currentValue}

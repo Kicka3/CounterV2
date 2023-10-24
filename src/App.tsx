@@ -17,9 +17,6 @@ function App() {
     const [disableBtn, setDisableBtn] = useState<boolean>(false)
 
 
-    // const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)                  //Стейт максимального числа для дисплея
-    const [errorMax, setErrorMax] = useState<string>('')                //Стейт ошибок для дисплея
-
     const incBtnHandler = () => {                                                   //inc counter
         setCounterValue(num => num + 1);
 
@@ -45,8 +42,8 @@ function App() {
         }
     }, [counterValue]);
 
-    const newMaxValueHandler = (maxValue: number) => {
-        setCounterValue(maxValue)
+    const setMaxHandler = (maxValue: number) => {
+        console.log('Хочу установить максимальное число!')
     }
 
     const setCountHandler = () => {                                     //Установить стартовое число
@@ -54,17 +51,11 @@ function App() {
     }
 
 
-    const setErrorDisplayHandler = (errTitle: string) => {                  //Ошибка для дисплея
-        setErrorMax(errTitle)
-        console.log('Я APP Ошибку из settings принял:' + errorMax)
-    }
-
     return (
         <div className="App">
             <Settings
-                newMaxValue={newMaxValueHandler}
-                setCount={setCountHandler}
-                setErrorDisplay={setErrorDisplayHandler}
+                setMax={setMaxHandler}
+                // setStart={setCountHandler}
             />
             <Counter
                 currentValue={counterValue}                                 //Число в стейте которое каунтим
