@@ -1,4 +1,4 @@
-import React, {JSX, useState} from 'react';
+import React, {JSX} from 'react';
 import {Button} from "../button/Button";
 import '../counter/counter.css'
 
@@ -9,32 +9,18 @@ type CounterPropsType = {
     setMaxValue: (value: boolean) => void          //Сетаем максимальное число-ограничение
     maxiValue: () => void                          //Функция-блокиратор (определяет макс число)
     errorMax: string                               //Ошибка на макс число
+
+    incBtn: () => void                              //Инкрементация
+    resetCount: () => void                          //reset btn
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
-    const {
-        currentCountNumber, setNumber,
-        maxiValue, maxValue, setMaxValue,
-        errorMax
-    } = props
-
-
-    const incBtn = () => {
-        setNumber(currentCountNumber + 1);
-        maxiValue();
-
-    }
-
-    const resetCount = () => {
-        console.log('RESET')
-        setNumber(0);
-        setMaxValue(false);
-    }
+    const {currentCountNumber, maxValue, errorMax, incBtn, resetCount} = props
 
     const displayCounter: JSX.Element =
         <h1 className={maxValue ? "MaxNumber" : undefined}>
             {errorMax
-                ?  <span className={"MaxNumErrorTitle"}>{errorMax}</span>
+                ? <span className={"MaxNumErrorTitle"}>{errorMax}</span>
                 : currentCountNumber
             }
         </h1>

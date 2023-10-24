@@ -8,45 +8,56 @@ function App() {
 
     //Logics from counter//:
 
-    const [currentCounterNumber, setCurrentCounterNumber] = useState<number>(0);        //This is global state of counter
-    const [maxValue, setMaxValue] = useState<boolean>(false);                           //This is value for disabled btns
+    const [counterValue, setCounterValue] = useState<number>(0)          //This is global state of counter
+    const [max, setMax] = useState<number>(5);                           //Максимальное число
+    const [start, setStart] = useState<number>(0)                        //Стартовое число
 
 
-    //Временный стейт для макс числа
-    const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)           //Стейт максимального числа для дисплея
+    //State of disable
+    const [disableBtn, setDisableBtn] = useState(false)
+
+
+    // const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)           //Стейт максимального числа для дисплея
     const [errorMax, setErrorMax] = useState<string>('')                //Стейт ошибок для дисплея
-    const setNewNumber = (number: number) => {
-        setCurrentCounterNumber(number)
+
+    const incBtnHandler = () => {                           //inc counter
+        setCounterValue(num => num + 1);
+        // maxiValue();
+    }
+
+    const resetCountHandler = () => {
+        setCounterValue(start)                                          //Reset counter
+        setDisableBtn(false)
+        console.log('RESET')
     }
 
     const maxiValue = () => {                                           //Проверка на max число
-        if (currentCounterNumber === (temporaryMaxNum - 1)) {
-            setMaxValue(true);
+        if (counterValue === max) {                                     //Проверяю со стартовым числом
+            setDisableBtn(true)
+        } else {
+            setDisableBtn(false)
         }
     }
 
-    useEffect(() => {
-        if (temporaryMaxNum) {
+    useEffect(() => {                                           //Что делает?
+        if (counterValue) {
             maxiValue()
         }
-    }, [temporaryMaxNum]);
+    }, [counterValue]);
 
     const newMaxValueHandler = (maxValue: number) => {
-        setTemporaryMaxNum(maxValue)
+        setCounterValue(maxValue)
     }
 
-    const setCountHandler = () => {         //Стартовое число
+    const setCountHandler = () => {                                     //Установить стартовое число
 
     }
 
-    const setErrorDisplayHandler = (errTitle: string) => {
+
+    const setErrorDisplayHandler = (errTitle: string) => {                  //Ошибка для дисплея
         setErrorMax(errTitle)
         console.log('Я APP Ошибку из settings принял:' + errorMax)
     }
-
-    // const
-    //     (errorMax)
-    //
 
     return (
         <div className="App">
@@ -63,6 +74,9 @@ function App() {
                 maxiValue={maxiValue}                                       //Функция-блокиратор (определяет макс число)
                 // setError={setErrorHandler}
                 errorMax={errorMax}
+
+                incBtn={incBtnHandler}
+                resetCount={resetCountHandler}
             />
         </div>
     );

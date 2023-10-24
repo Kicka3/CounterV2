@@ -7,7 +7,6 @@ import {Input} from "../input/Input";
 type SettingsPropsType = {
     setCount: (value: number) => void                                     //Стартовое число из инпута
     newMaxValue: (maxValue: number) => void
-    // setError: (errTitle: string) => void
     setErrorDisplay: (errTitle: string) => void
 }
 
@@ -37,7 +36,6 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
 
     const setMaxValueHandler = (newMaxValue: number) => {
         setMaxValue(newMaxValue)                                          //Сохраняю число в local стейт.
-        // console.log('Новое макс число из инпута:' + newMaxValue)
     }
 
     const errorHandler = (errTitle: string) => {
