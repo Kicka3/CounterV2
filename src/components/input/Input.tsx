@@ -4,24 +4,26 @@ import React from 'react';
 
 type InputPropsType = {
     value: number
-    setValue: (newValue: number) => void
-    errorMax?: (errTitle: string) => void  //Ошибка при -0
+    seMaxValue: (newValue: number) => void
+    setMaxError: (errTitle: string) => void  //Ошибка при -0
 }
 
 export const Input: React.FC<InputPropsType> = (props) => {
-    const {value, setValue, errorMax, ...restProps} = props
+    const {value, seMaxValue, setMaxError, ...restProps} = props
 
     const [currentValue, setCurrentValue] = useState<number>(value)      //Локальный стейт инпута (сохраняет число в инпуте)
-    const [error, setError] = useState<string | null>(null)
+    const [errorMax, setErrorMax] = useState<string>('')
+
     const changeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
         let valueForInput = e.currentTarget.valueAsNumber                 //Сохраняю число из инпута в number
-        if (valueForInput <= 0) {                                         //Проверяю число
-            setError('Incorrect value')                                 //Бага!! при 1
-                                                                                 //Передаю ошибку вверх
+        if (valueForInput < 1) {                                          //Проверяю число
+            setErrorMax('Incorrect max value')                      //Бага!! при 1
+            console.log('Ошибка в инпуте:' + errorMax)
+            setMaxError(errorMax)                                       //Отправляю ошибку выше
         } else {
-            setValue(valueForInput)                                       //Куда сетаю? Хуй знает
+            seMaxValue(valueForInput)                                     //Куда сетаю? Хуй знает
             setCurrentValue(valueForInput)                                //Сетаю полученное число в локальный стейт инпута
-            setError(null)
+            setErrorMax('')
         }
     }
 
@@ -33,7 +35,7 @@ export const Input: React.FC<InputPropsType> = (props) => {
 
     return (
         <input
-            className={error ? "errorInput" : "inputValue"}               //Добавить стиль с ошибкой
+            className={errorMax ? "errorInput" : "inputValue"}               //Добавить стиль с ошибкой
             type={"number"}
             onChange={changeInputHandler}
             value={currentValue}

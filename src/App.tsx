@@ -11,9 +11,10 @@ function App() {
     const [currentCounterNumber, setCurrentCounterNumber] = useState<number>(0);        //This is global state of counter
     const [maxValue, setMaxValue] = useState<boolean>(false);                           //This is value for disabled btns
 
+
     //Временный стейт для макс числа
-    const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)
-    const [errorMax, setErrorMax] = useState<string | null>(null)
+    const [temporaryMaxNum, setTemporaryMaxNum] = useState(0)           //Стейт максимального числа для дисплея
+    const [errorMax, setErrorMax] = useState<string>('')                //Стейт ошибок для дисплея
     const setNewNumber = (number: number) => {
         setCurrentCounterNumber(number)
     }
@@ -38,18 +39,21 @@ function App() {
 
     }
 
-    const setErrorHandler = (errTitle: string) => {
+    const setErrorDisplayHandler = (errTitle: string) => {
         setErrorMax(errTitle)
+        console.log('Я APP Ошибку из settings принял:' + errorMax)
     }
 
-    //-------------------------
+    // const
+    //     (errorMax)
+    //
 
     return (
         <div className="App">
             <Settings
-                setError={setErrorHandler}
                 newMaxValue={newMaxValueHandler}
                 setCount={setCountHandler}
+                setErrorDisplay={setErrorDisplayHandler}
             />
             <Counter
                 currentCountNumber={currentCounterNumber}                   //Число в стейте которое каунтим
@@ -57,8 +61,8 @@ function App() {
                 maxValue={maxValue}                                         //Максимальное число-ограничение
                 setMaxValue={setMaxValue}                                   //Сетаем максимальное число-ограничение
                 maxiValue={maxiValue}                                       //Функция-блокиратор (определяет макс число)
-                setError={setErrorHandler}
-
+                // setError={setErrorHandler}
+                errorMax={errorMax}
             />
         </div>
     );

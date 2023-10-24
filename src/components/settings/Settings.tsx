@@ -7,16 +7,17 @@ import {Input} from "../input/Input";
 type SettingsPropsType = {
     setCount: (value: number) => void                                     //Стартовое число из инпута
     newMaxValue: (maxValue: number) => void
-    setError: (errTitle: string) => void
+    // setError: (errTitle: string) => void
+    setErrorDisplay: (errTitle: string) => void
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setCount, newMaxValue, setError} = props
+    const {setCount, newMaxValue, setErrorDisplay} = props
 
     //Локальные стейты:
     const [maxValue, setMaxValue] = useState<number>(0);
     const [startValue, setStartValue] = useState<number>(0);
-
+    const [maxError, setMaxError] = useState<string>('')
 
     const setValueHandler = () => {
         setCount(startValue)                                             //Передаём стартовое число для каунтера
@@ -36,11 +37,13 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
 
     const setMaxValueHandler = (newMaxValue: number) => {
         setMaxValue(newMaxValue)                                          //Сохраняю число в local стейт.
-        console.log('Новое макс число из инпута:' + newMaxValue)
+        // console.log('Новое макс число из инпута:' + newMaxValue)
     }
 
     const errorHandler = (errTitle: string) => {
-        setError(errTitle)
+        setMaxError(errTitle)                                               //Сетаю ошибку
+        setErrorDisplay(maxError)                                           //Отправляю в каунтер
+        console.log('Я settings Ошибка maxError из инпута:' + maxError)
     }
 
     return (
@@ -50,9 +53,9 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                     <div className={"MaxValueWrapper"}>
                         <h1 className={"MaxValue"}>max value:</h1>
                         <Input
-                            setValue={setMaxValueHandler}                  //Получаю новое макс число из инпута
+                            seMaxValue={setMaxValueHandler}                  //Получаю новое макс число из инпута
                             value={maxValue}                               //Передаю инпуту max число
-                            errorMax={errorHandler}
+                            setMaxError={errorHandler}
                         />
                     </div>
                     <div className={"StartValueWrapper"}>
