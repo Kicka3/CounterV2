@@ -47,14 +47,28 @@ function App() {
     const setMaxValueHandler = () => {
         // console.log('Новое максимальное число:' + maxValue)
         // let maxValueForStorage = JSON.stringify(maxValue)
-        // localStorage.setItem('currentValue', maxValueForStorage)           //Сетаю новое макс число в storage
+        // localStorage.setItem('currentValue', maxValueForStorage)
         // setMax(maxValue)                                                     //Передаю новое Max число для каунтера
         let maxValueForStorage = JSON.stringify(max)
-        localStorage.setItem('maxValue', maxValueForStorage)
+        localStorage.setItem('maxValue', maxValueForStorage)                    //Сетаю новое макс число в storage
     }
+    // useEffect(() => {
+    //     let numFromStorage = localStorage.getItem('currentValue')
+    //     if (numFromStorage) {
+    //         let valueFromStorage = JSON.parse(numFromStorage)              //При загрузки страницы получаю число из localStorage
+    //         setMaxValue(valueFromStorage)                                  //И сетаю его в локальный стейт
+    //     }
+    // }, []);
 
+    useEffect(() => {
+        let numFromStorage = localStorage.getItem('maxValue')
+            if (numFromStorage) {
+                let valueForinputFromStorage = JSON.parse(numFromStorage)
+                MaxForSaveInput(valueForinputFromStorage)
+            }
+    }, []);
 
-    const setMaxHandler = (valueForInput: number) => {
+    const setMaxHandler = (valueForInput: number) => {                          //Сетаю новое макс число в стейт
         console.log('APP: Хочу установить максимальное число!')
         setMax(valueForInput)
     }
@@ -67,7 +81,8 @@ function App() {
     return (
         <div className="App">
             <Settings
-                setMax={setMaxHandler}
+                setMax={setMaxHandler}                              //Max число
+                MaxForSaveInputTwoo={MaxForSaveInput}                //Передаю макс число изstorage обратно в инпут для сохранения
                 setValueHandler={setMaxValueHandler}
                 // setStart={setCountHandler}
             />
