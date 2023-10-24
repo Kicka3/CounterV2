@@ -42,8 +42,21 @@ function App() {
         }
     }, [counterValue]);
 
-    const setMaxHandler = (maxValue: number) => {
-        console.log('Хочу установить максимальное число!')
+    //-----------------------------------
+
+    const setMaxValueHandler = () => {
+        // console.log('Новое максимальное число:' + maxValue)
+        // let maxValueForStorage = JSON.stringify(maxValue)
+        // localStorage.setItem('currentValue', maxValueForStorage)           //Сетаю новое макс число в storage
+        // setMax(maxValue)                                                     //Передаю новое Max число для каунтера
+        let maxValueForStorage = JSON.stringify(max)
+        localStorage.setItem('maxValue', maxValueForStorage)
+    }
+
+
+    const setMaxHandler = (valueForInput: number) => {
+        console.log('APP: Хочу установить максимальное число!')
+        setMax(valueForInput)
     }
 
     const setCountHandler = () => {                                     //Установить стартовое число
@@ -55,6 +68,7 @@ function App() {
         <div className="App">
             <Settings
                 setMax={setMaxHandler}
+                setValueHandler={setMaxValueHandler}
                 // setStart={setCountHandler}
             />
             <Counter
