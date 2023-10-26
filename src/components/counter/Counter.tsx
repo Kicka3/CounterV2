@@ -1,6 +1,8 @@
-import React, {JSX} from 'react';
+import React from 'react';
 import {Button} from "../button/Button";
 import '../counter/counter.css'
+import {DisplayCounter} from "../displayCounter/DisplayCounter";
+
 
 type CounterPropsType = {
     currentValue: number                              //Число в стейте которое каунтим
@@ -12,21 +14,18 @@ type CounterPropsType = {
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
-    const {currentValue, maxValue, startValue, disabled, incBtn, resetCount} = props
-
-    const displayCounter: JSX.Element =
-        <h1 className={disabled ? "MaxNumber" : undefined}>
-            {disabled
-                ? <span className={"MaxNumErrorTitle"}>{maxValue}</span>
-                : currentValue
-            }
-        </h1>
+    const {currentValue, startValue, disabled, incBtn, resetCount, maxValue} = props
 
     return (
         <>
             <div className={"Counter"}>
                 <div className={"DisplayCount"}>
-                    {displayCounter}
+                    <DisplayCounter
+                        startValue={startValue}
+                        disabled={disabled}
+                        currentValue={currentValue}
+                        maxValue={maxValue}
+                    />
                 </div>
 
                 <div className={"BtnWrapper"}>
