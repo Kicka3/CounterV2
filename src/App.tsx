@@ -64,6 +64,7 @@ function App() {
                 setSettings={setSettings}
                 isValidMax={isValidMax}
                 isValidStart={isValidStart}
+                counterValue={counterValue}
             />
             <Counter
                 currentValue={counterValue}                          //Число в стейте которое каунтим
