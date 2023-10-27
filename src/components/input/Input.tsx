@@ -16,8 +16,8 @@ export const Input: React.FC<InputPropsType> = (props) => {
             <input
                 // className={errorMax ? "errorInput" : "inputValue"}
                 className={"inputValue"}                                            //Добавить стиль с ошибкой
-                id={name}
                 type={"number"}
+                id={name}
                 onChange={onChangeInputs}
                 value={value}
             />

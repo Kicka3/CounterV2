@@ -34,19 +34,12 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                 setStart(+value)
                 break
             }
-
         }
     }
 
     const onClickBtnHandler = () => {
         setSettings()
-        // setValueStorageHandler()
-        // console.log('Clicked set')
     }
-
-    // const onChangeStartInputHandler = () => {
-    //     console.log('Меняю стартовое значение!')
-    // }
 
     return (
         <>
@@ -57,8 +50,6 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                         <Input name="maxValue"
                                onChangeInputs={onChangeInputs}
                                value={max}
-                            // onChangeInput={onChangeMaxInputHandler}        //Получаю значение из инпута
-                            // maxValueForInput={maxValueForInput}
                         />
                     </div>
                     <div className={"StartValueWrapper"}>
@@ -66,19 +57,16 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                         <Input name="startValue"
                                onChangeInputs={onChangeInputs}
                                value={start}
-                            // onChangeInput={onChangeStartInputHandler}
-
                         />
                     </div>
                 </div>
 
                 <div className={"BtnWrapper"}>
                     <Button
+                        // className={maxValue ? 'DisabledBtn' : 'ActiveBtn'}
                         className={'ActiveBtn'}
                         name={"set"}
                         onClick={onClickBtnHandler}
-                        // className={maxValue ? 'DisabledBtn' : 'ActiveBtn'}
-                        // disabled={minValue}
                     />
                 </div>
             </div>

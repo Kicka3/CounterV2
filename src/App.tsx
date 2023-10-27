@@ -3,7 +3,6 @@ import './App.css';
 import {Counter} from "./components/counter/Counter";
 import {Settings} from "./components/settings/Settings";
 
-
 function App() {
 
     //Logics for counter//:
@@ -31,32 +30,28 @@ function App() {
         console.log('RESET')
     }
 
-    // const setMaxHandler = (valueForInput: number) => {                          //Сетаю новое макс число в стейт
-    //     setMax(valueForInput)
-    // }
-
-    // const SetValueInStorageHandler = () => {                                    //Сетаю новое число в storage
-    //     let itemForStorage = JSON.stringify(max)
-    //     localStorage.setItem('maxCounterValue', itemForStorage)
-    //     console.log('Установил в storage ' + itemForStorage)
-    // }
-
-    //Тут будет логика для сохранения числа в инпут
-    useEffect(() => {                                                   //Достаю число из storage для инпут при перезагрузке
-        let numFromStorage = localStorage.getItem('maxCounterValue')
-        if (numFromStorage) {
-            let valueForInputFromStorage = JSON.parse(numFromStorage)
-            setMax(valueForInputFromStorage)
-            console.log(`Достал число из Storage ` + valueForInputFromStorage)
-        }
-    }, []);
-
-    const setSettings = () => {
+    const setSettings = () => {                                    //Закидываю в storage
         localStorage.setItem('maxValue', `${max}`)
         localStorage.setItem('startValue', `${start}`)
         setCounterValue(start)
         // console.log('Установил в storage ')
     }
+
+    //Тут будет логика для сохранения числа в инпут
+    useEffect(() => {                                                   //Достаю число из storage для инпут при перезагрузке
+        let maxFromStorage = localStorage.getItem('maxValue')
+        if (maxFromStorage) {
+            let maxValueFromStorage = JSON.parse(maxFromStorage)
+            setMax(maxValueFromStorage)
+            console.log(`Достал max число из Storage ` + maxValueFromStorage)
+        }
+        let startFromStorage = localStorage.getItem('startValue')
+        if (startFromStorage) {
+            let startValueFromStorage = JSON.parse(startFromStorage)
+            setStart(startValueFromStorage)
+            console.log(`Достал start число из Storage ` + startValueFromStorage)
+        }
+    }, []);
 
     return (
         <div className="App">
