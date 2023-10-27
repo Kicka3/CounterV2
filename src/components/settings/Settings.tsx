@@ -10,8 +10,6 @@ type SettingsPropsType = {
     setMax: (valueForInput: number) => void                     //Функция для нового мак числа
     setStart: (value: number) => void
     setSettings: () => void
-    // maxValueForInput: number                                    //Число для инпута передаю из app
-    // setValueStorageHandler: () => void
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
@@ -24,7 +22,8 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
     //         setMax(valueForInput)                                         //Cетаю в стейт в App (fun)
     //     }
     // }
-    const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {                      //Лювлю число из инпута
+
+    const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {          //Лювлю число из инпута
         const {id, value} = e.currentTarget
         switch (id) {
             case "maxValue": {

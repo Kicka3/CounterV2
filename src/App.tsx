@@ -12,7 +12,6 @@ function App() {
     const [max, setMax] = useState<number>(5);                           //Максимальное число
     const [start, setStart] = useState<number>(0)                        //Стартовое число
 
-
     //State of disabled
     const [disableBtn, setDisableBtn] = useState<boolean>(false)
 
@@ -53,7 +52,6 @@ function App() {
     }, []);
 
     const setSettings = () => {
-        // let itemForStorage = JSON.stringify(max)
         localStorage.setItem('maxValue', `${max}`)
         localStorage.setItem('startValue', `${start}`)
         setCounterValue(start)
@@ -63,22 +61,19 @@ function App() {
     return (
         <div className="App">
             <Settings
-                // setValueStorageHandler={SetValueInStorageHandler}
-                // setMax={setMaxHandler}                                     //Max число это функция!!!
                 setMax={setMax}                                     //Max число это функция!!!
-                // maxValueForInput={max}
                 max={max}
                 setStart={setStart}
                 start={start}
                 setSettings={setSettings}
             />
             <Counter
-                currentValue={counterValue}                                 //Число в стейте которое каунтим
+                currentValue={counterValue}                          //Число в стейте которое каунтим
                 startValue={start}
                 disabled={disableBtn}
                 incBtn={incBtnHandler}
                 resetCount={resetCountHandler}
-                maxValue={max}                                              //Максимальное число-ограничение
+                maxValue={max}                                        //Максимальное число-ограничение
             />
         </div>
     );
