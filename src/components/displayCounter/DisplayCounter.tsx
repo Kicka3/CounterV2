@@ -10,14 +10,13 @@ type DisplayCounterPropsType = {
 export const DisplayCounter: React.FC<DisplayCounterPropsType> = ({disabled, currentValue, startValue, maxValue}) => {
 
     let statusErr = (startValue < 0 || maxValue <= startValue)
-
+    console.log('disabled: ' + disabled)
     const displayCounter: JSX.Element =
-        <h1 className={disabled ? "MaxNumberError" : undefined}>
+        <h1 className={currentValue === maxValue ? "MaxNumberError" : ''}>
             {disabled
                 ? <span className={"MaxNumErrorTitle"}>{currentValue}</span>
                 :
-                <span
-                    className={statusErr ? 'errorMessage' : ""}>{currentValue === 0 ? 'Press set' : (statusErr ? 'Incurrect value' : currentValue)} </span>
+                <span className={statusErr ? 'errorMessage' : ""}>{currentValue === 0 ? 'Enter values and press set' : (statusErr ? 'Incorrect value' : currentValue)} </span>
             }
         </h1>
 

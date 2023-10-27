@@ -17,21 +17,13 @@ function App() {
     const isValidMax = max <= 0 || max <= start
     const isValidStart = start < 0 || start >= max
 
-    // const incBtnHandler = () => {                                                   //inc counter
-    //     if (counterValue < max) {
-    //         setCounterValue(num => num + 1);
-    //     } else {
-    //         setDisableBtn(true)
-    //     }
-    // }
-
     const incBtnHandler = () => {                                                   //inc counter
         if (counterValue < max) {
             setCounterValue(num => num + 1);
-        } else {
-            setDisableBtn(true)
         }
     }
+
+
 
     const resetCountHandler = () => {
         setCounterValue(start)                                                      //Reset counter
