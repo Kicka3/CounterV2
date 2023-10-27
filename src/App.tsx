@@ -14,13 +14,22 @@ function App() {
     //State of disabled
     const [disableBtn, setDisableBtn] = useState<boolean>(false)
 
+    const isValidMax = max <= 0 || max <= start
+    const isValidStart = start < 0 || start >= max
+
+    // const incBtnHandler = () => {                                                   //inc counter
+    //     if (counterValue < max) {
+    //         setCounterValue(num => num + 1);
+    //     } else {
+    //         setDisableBtn(true)
+    //     }
+    // }
 
     const incBtnHandler = () => {                                                   //inc counter
-        setCounterValue(num => num + 1);
-        if (counterValue === max - 1) {
-            setDisableBtn(true)
+        if (counterValue < max) {
+            setCounterValue(num => num + 1);
         } else {
-            setDisableBtn(false)
+            setDisableBtn(true)
         }
     }
 
@@ -30,7 +39,7 @@ function App() {
         console.log('RESET')
     }
 
-    const setSettings = () => {                                    //Закидываю в storage
+    const setSettings = () => {                                                  //Закидываю в storage
         localStorage.setItem('maxValue', `${max}`)
         localStorage.setItem('startValue', `${start}`)
         setCounterValue(start)
@@ -61,6 +70,8 @@ function App() {
                 setStart={setStart}
                 start={start}
                 setSettings={setSettings}
+                isValidMax={isValidMax}
+                isValidStart={isValidStart}
             />
             <Counter
                 currentValue={counterValue}                          //Число в стейте которое каунтим

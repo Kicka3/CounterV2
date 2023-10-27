@@ -31,3 +31,7 @@
 .MaxNumErrorTitle {
     color: red;
 }
+
+.errorMessage {
+    color: red;
+}

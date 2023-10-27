@@ -10,10 +10,12 @@ type SettingsPropsType = {
     setMax: (valueForInput: number) => void                     //Функция для нового мак числа
     setStart: (value: number) => void
     setSettings: () => void
+    isValidMax: boolean
+    isValidStart: boolean
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setMax, max, start, setStart, setSettings} = props
+    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart} = props
 
     // const onChangeMaxInputHandler = (valueForInput: number) => {             //Лювлю число из инпута
     //     if (valueForInput < 1) {                                          //Проверяю число
@@ -28,10 +30,12 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
         switch (id) {
             case "maxValue": {
                 setMax(+value)
+                console.log(`max: `+value)
                 break
             }
             case "startValue": {
                 setStart(+value)
+                console.log(`start: `+value)
                 break
             }
         }
@@ -50,6 +54,7 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                         <Input name="maxValue"
                                onChangeInputs={onChangeInputs}
                                value={max}
+                               isValid={isValidMax}
                         />
                     </div>
                     <div className={"StartValueWrapper"}>
@@ -57,6 +62,7 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
                         <Input name="startValue"
                                onChangeInputs={onChangeInputs}
                                value={start}
+                               isValid={isValidStart}
                         />
                     </div>
                 </div>
