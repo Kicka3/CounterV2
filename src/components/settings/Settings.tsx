@@ -16,7 +16,7 @@ type SettingsPropsType = {
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart, counterValue} = props
+    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart} = props
 
     const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {          //Лювлю число из инпута
         const {id, value} = e.currentTarget

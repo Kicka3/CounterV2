@@ -35,12 +35,6 @@
     gap: 26px;
 }
 
-/*.MaxValueWrapper input {*/
-/*    min-height: 28px;*/
-/*    max-width: 158px;*/
-/*    outline-color: rgb(21, 142, 185);*/
-/*}*/
-
 .StartValueWrapper {
     display: flex;
     flex-direction: row;
@@ -50,8 +44,3 @@
     gap: 26px;
 }
 
-/*.StartValueWrapper input {*/
-/*    min-height: 28px;*/
-/*    max-width: 158px;*/
-/*    outline-color: rgb(21, 142, 185);*/
-/*}*/
