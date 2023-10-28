@@ -65,6 +65,8 @@ function App() {
                 isValidMax={isValidMax}
                 isValidStart={isValidStart}
                 counterValue={counterValue}
+
+                setDisableBtn={setDisableBtn}
             />
             <Counter
                 currentValue={counterValue}                          //Число в стейте которое каунтим

@@ -30,7 +30,7 @@ export const Counter: React.FC<CounterPropsType> = (props) => {
 
                     <div className={"BtnWrapper"}>
                         <Button
-                            className={currentValue === maxValue ? 'DisabledBtn' : 'ActiveBtn'}
+                            className={currentValue === maxValue || maxValue === startValue ? 'DisabledBtn' : 'ActiveBtn'}
                             name={"inc"}
                             onClick={incBtn}
                             disabled={currentValue === maxValue || maxValue <= startValue || maxValue < 0 || startValue < 0}
