@@ -6,18 +6,19 @@ import {Input} from "../input/Input";
 
 type SettingsPropsType = {
     setMax: (valueForInput: number) => void                     //Функция для нового мак числа
-    setStart: (value: number) => void
-    setStatus: () => void                         //Функция для изменения display на press set
+    setStart: (value: number) => void                           //Функция для изм стартового числа
+    setStatus: () => void                                       //Функция для изменения display на press set
     setSettings: () => void
     start: number
     max: number
     isValidMax: boolean
     isValidStart: boolean
     counterValue: number
+    status: boolean
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart, setStatus} = props
+    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart, setStatus, status} = props
 
     const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {          //Лювлю число из инпута
         const {id, value} = e.currentTarget
@@ -36,6 +37,7 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
             }
         }
     }
+
 
     const onClickBtnHandler = () => {
         setSettings()
@@ -65,10 +67,10 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
 
                 <div className={"BtnWrapper"}>
                     <Button
-                        className={'ActiveBtn'}
+                        className={status ? 'ActiveBtn' : 'DisabledBtn'}
                         name={"set"}
                         onClick={onClickBtnHandler}
-                        disabled={max <= start || start < 0}
+                        disabled={max <= start || start < 0 || !status}
                     />
                 </div>
             </div>

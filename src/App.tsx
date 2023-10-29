@@ -10,10 +10,10 @@ function App() {
     const [max, setMax] = useState<number>(5);                           //Максимальное число
     const [start, setStart] = useState<number>(0)                        //Стартовое число
 
-    const [disableBtn, setDisableBtn] = useState<boolean>(false)         //State of disabled
+    const [disableBtn, setDisableBtn] = useState(false)                  //State of disabled
     const [status, setStatus] = useState(false)                          //State for status set btn
 
-    const setStatushandler = () => {
+    const setStatusHandler = () => {
         setStatus(true)
         console.log('STATUS '+status)
     }
@@ -39,7 +39,6 @@ function App() {
         localStorage.setItem('startValue', `${start}`)
         setCounterValue(start)
         setStatus(false)
-        // console.log('Установил в storage ')
     }
 
     //Тут будет логика для сохранения числа в инпут
@@ -69,7 +68,8 @@ function App() {
                 isValidMax={isValidMax}
                 isValidStart={isValidStart}
                 counterValue={counterValue}
-                setStatus={setStatushandler}
+                setStatus={setStatusHandler}
+                status={status}
 
             />
             <Counter

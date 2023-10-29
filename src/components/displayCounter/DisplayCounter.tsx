@@ -18,7 +18,6 @@ export const DisplayCounter: React.FC<DisplayCounterPropsType> = ({disabled, cur
                 {disabled
                     ? <span className={statusErr ? "MaxNumErrorTitle" : ""}>{currentValue}</span>
                     :
-                    // <span className={statusErr ? 'errorMessage' : ""}>{ statusErr ? 'Incorrect value' : status ? 'Enter values and press set' : currentValue} </span>
                     <span className={statusErr ? 'errorMessage' : ""}>{ statusErr ? 'Incorrect value' : statusDisplay} </span>
                 }
             </h1>
