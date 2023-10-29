@@ -14,11 +14,10 @@ type SettingsPropsType = {
     isValidStart: boolean
     counterValue: number
 
-    setDisableBtn: (value: boolean) => void
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart, setDisableBtn} = props
+    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart} = props
 
     const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {          //Лювлю число из инпута
         const {id, value} = e.currentTarget
@@ -26,21 +25,15 @@ export const Settings: React.FC<SettingsPropsType> = (props) => {
             case "maxValue": {
                 setMax(+value)
                 console.log(`max: ` + value)
-                validDisable()
                 break
             }
             case "startValue": {
                 setStart(+value)
                 console.log(`start: ` + value)
-                validDisable()
                 break
             }
         }
     }
-
-    const validDisable = () => {
-         max <=0 || max <= start ? setDisableBtn(true) : setDisableBtn(false)
-    }   //Хуйня
 
     const onClickBtnHandler = () => {
         setSettings()

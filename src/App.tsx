@@ -13,6 +13,8 @@ function App() {
 
     //State of disabled
     const [disableBtn, setDisableBtn] = useState<boolean>(false)
+    //State for status set btn
+    const [status, setStatus] = useState(false)
 
     const isValidMax = max <= 0 || max <= start
     const isValidStart = start < 0 || start >= max
@@ -24,17 +26,17 @@ function App() {
     }
 
 
-
     const resetCountHandler = () => {
         setCounterValue(start)                                                      //Reset counter
         setDisableBtn(false)
         console.log('RESET')
     }
 
-    const setSettings = () => {                                                  //Закидываю в storage
+    const setSettings = () => {                                                  //Закидываю в storage по нажатию на SET
         localStorage.setItem('maxValue', `${max}`)
         localStorage.setItem('startValue', `${start}`)
         setCounterValue(start)
+        setStatus(true)
         // console.log('Установил в storage ')
     }
 
@@ -65,8 +67,7 @@ function App() {
                 isValidMax={isValidMax}
                 isValidStart={isValidStart}
                 counterValue={counterValue}
-
-                setDisableBtn={setDisableBtn}
+                
             />
             <Counter
                 currentValue={counterValue}                          //Число в стейте которое каунтим
@@ -75,6 +76,7 @@ function App() {
                 incBtn={incBtnHandler}
                 resetCount={resetCountHandler}
                 maxValue={max}                                        //Максимальное число-ограничение
+                status={status}
             />
         </div>
     );

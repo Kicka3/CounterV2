@@ -11,10 +11,11 @@ type CounterPropsType = {
     disabled: boolean                                 //Блокировка
     incBtn: () => void                                //Инкрементация
     resetCount: () => void                            //reset btn
+    status: boolean
 }
 
 export const Counter: React.FC<CounterPropsType> = (props) => {
-    const {currentValue, startValue, disabled, incBtn, resetCount, maxValue} = props
+    const {currentValue, startValue, disabled, incBtn, resetCount, maxValue, status} = props
 
     return (
         <>
@@ -25,6 +26,7 @@ export const Counter: React.FC<CounterPropsType> = (props) => {
                             disabled={disabled}
                             currentValue={currentValue}
                             maxValue={maxValue}
+                            status={status}
                         />
                     </div>
 
