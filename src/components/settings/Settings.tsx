@@ -5,31 +5,33 @@ import {Input} from "../input/Input";
 
 
 type SettingsPropsType = {
-    start: number
-    max: number
     setMax: (valueForInput: number) => void                     //Функция для нового мак числа
     setStart: (value: number) => void
+    setStatus: () => void                         //Функция для изменения display на press set
     setSettings: () => void
+    start: number
+    max: number
     isValidMax: boolean
     isValidStart: boolean
     counterValue: number
-
 }
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
-    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart} = props
+    const {setMax, max, start, setStart, setSettings, isValidMax, isValidStart, setStatus} = props
 
     const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {          //Лювлю число из инпута
         const {id, value} = e.currentTarget
         switch (id) {
             case "maxValue": {
                 setMax(+value)
-                console.log(`max: ` + value)
+                // console.log(`max: ` + value)
+                setStatus()
                 break
             }
             case "startValue": {
                 setStart(+value)
-                console.log(`start: ` + value)
+                // console.log(`start: ` + value)
+                setStatus()
                 break
             }
         }

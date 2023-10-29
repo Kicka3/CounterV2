@@ -3,18 +3,20 @@ import './App.css';
 import {Counter} from "./components/counter/Counter";
 import {Settings} from "./components/settings/Settings";
 
-function App() {
 
-    //Logics for counter//:
+function App() {
 
     const [counterValue, setCounterValue] = useState<number>(0)          //This is global state of counter
     const [max, setMax] = useState<number>(5);                           //Максимальное число
     const [start, setStart] = useState<number>(0)                        //Стартовое число
 
-    //State of disabled
-    const [disableBtn, setDisableBtn] = useState<boolean>(false)
-    //State for status set btn
-    const [status, setStatus] = useState(false)
+    const [disableBtn, setDisableBtn] = useState<boolean>(false)         //State of disabled
+    const [status, setStatus] = useState(false)                          //State for status set btn
+
+    const setStatushandler = () => {
+        setStatus(true)
+        console.log('STATUS '+status)
+    }
 
     const isValidMax = max <= 0 || max <= start
     const isValidStart = start < 0 || start >= max
@@ -36,7 +38,7 @@ function App() {
         localStorage.setItem('maxValue', `${max}`)
         localStorage.setItem('startValue', `${start}`)
         setCounterValue(start)
-        setStatus(true)
+        setStatus(false)
         // console.log('Установил в storage ')
     }
 
@@ -67,7 +69,8 @@ function App() {
                 isValidMax={isValidMax}
                 isValidStart={isValidStart}
                 counterValue={counterValue}
-                
+                setStatus={setStatushandler}
+
             />
             <Counter
                 currentValue={counterValue}                          //Число в стейте которое каунтим
